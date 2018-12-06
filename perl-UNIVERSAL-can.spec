@@ -4,7 +4,7 @@
 #
 Name     : perl-UNIVERSAL-can
 Version  : 1.20140328
-Release  : 3
+Release  : 4
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHROMATIC/UNIVERSAL-can-1.20140328.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHROMATIC/UNIVERSAL-can-1.20140328.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libu/libuniversal-can-perl/libuniversal-can-perl_1.20140328-1.debian.tar.xz
