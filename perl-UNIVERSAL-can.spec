@@ -4,7 +4,7 @@
 #
 Name     : perl-UNIVERSAL-can
 Version  : 1.20140328
-Release  : 9
+Release  : 10
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHROMATIC/UNIVERSAL-can-1.20140328.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHROMATIC/UNIVERSAL-can-1.20140328.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libu/libuniversal-can-perl/libuniversal-can-perl_1.20140328-1.debian.tar.xz
@@ -12,6 +12,7 @@ Summary  : 'work around buggy code calling UNIVERSAL::can() as a function'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl Artistic-2.0 GPL-1.0 GPL-2.0 MIT
 Requires: perl-UNIVERSAL-can-license = %{version}-%{release}
+Requires: perl-UNIVERSAL-can-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -24,6 +25,7 @@ function, which it is not.
 Summary: dev components for the perl-UNIVERSAL-can package.
 Group: Development
 Provides: perl-UNIVERSAL-can-devel = %{version}-%{release}
+Requires: perl-UNIVERSAL-can = %{version}-%{release}
 
 %description dev
 dev components for the perl-UNIVERSAL-can package.
@@ -37,18 +39,28 @@ Group: Default
 license components for the perl-UNIVERSAL-can package.
 
 
+%package perl
+Summary: perl components for the perl-UNIVERSAL-can package.
+Group: Default
+Requires: perl-UNIVERSAL-can = %{version}-%{release}
+
+%description perl
+perl components for the perl-UNIVERSAL-can package.
+
+
 %prep
 %setup -q -n UNIVERSAL-can-1.20140328
-cd ..
-%setup -q -T -D -n UNIVERSAL-can-1.20140328 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libuniversal-can-perl_1.20140328-1.debian.tar.xz
+cd %{_builddir}/UNIVERSAL-can-1.20140328
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/UNIVERSAL-can-1.20140328/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/UNIVERSAL-can-1.20140328/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -58,7 +70,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -67,8 +79,8 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-UNIVERSAL-can
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-UNIVERSAL-can/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-UNIVERSAL-can/deblicense_copyright
+cp %{_builddir}/UNIVERSAL-can-1.20140328/LICENSE %{buildroot}/usr/share/package-licenses/perl-UNIVERSAL-can/3dc628e3e39323728bfe6ed5e4877de005032bd2
+cp %{_builddir}/UNIVERSAL-can-1.20140328/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-UNIVERSAL-can/205e1ea04ef766ae55d3756f5e945698738f9c0b
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -81,7 +93,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/UNIVERSAL/can.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -89,5 +100,9 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-UNIVERSAL-can/LICENSE
-/usr/share/package-licenses/perl-UNIVERSAL-can/deblicense_copyright
+/usr/share/package-licenses/perl-UNIVERSAL-can/205e1ea04ef766ae55d3756f5e945698738f9c0b
+/usr/share/package-licenses/perl-UNIVERSAL-can/3dc628e3e39323728bfe6ed5e4877de005032bd2
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/UNIVERSAL/can.pm
