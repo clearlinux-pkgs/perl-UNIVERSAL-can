@@ -4,7 +4,7 @@
 #
 Name     : perl-UNIVERSAL-can
 Version  : 1.20140328
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHROMATIC/UNIVERSAL-can-1.20140328.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHROMATIC/UNIVERSAL-can-1.20140328.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libu/libuniversal-can-perl/libuniversal-can-perl_1.20140328-1.debian.tar.xz
@@ -80,7 +80,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-UNIVERSAL-can
 cp %{_builddir}/UNIVERSAL-can-1.20140328/LICENSE %{buildroot}/usr/share/package-licenses/perl-UNIVERSAL-can/3dc628e3e39323728bfe6ed5e4877de005032bd2
-cp %{_builddir}/UNIVERSAL-can-1.20140328/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-UNIVERSAL-can/205e1ea04ef766ae55d3756f5e945698738f9c0b
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-UNIVERSAL-can/205e1ea04ef766ae55d3756f5e945698738f9c0b
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -105,4 +105,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/UNIVERSAL/can.pm
+/usr/lib/perl5/vendor_perl/5.30.2/UNIVERSAL/can.pm
