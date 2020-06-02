@@ -4,7 +4,7 @@
 #
 Name     : perl-UNIVERSAL-can
 Version  : 1.20140328
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHROMATIC/UNIVERSAL-can-1.20140328.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHROMATIC/UNIVERSAL-can-1.20140328.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libu/libuniversal-can-perl/libuniversal-can-perl_1.20140328-1.debian.tar.xz
@@ -105,4 +105,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/UNIVERSAL/can.pm
+/usr/lib/perl5/vendor_perl/5.30.3/UNIVERSAL/can.pm
